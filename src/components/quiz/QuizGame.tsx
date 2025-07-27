@@ -62,23 +62,44 @@ export const QuizGame: React.FC<QuizGameProps> = ({ teams, setTeams, onComplete 
     setShowResult(false);
     setSelectedAnswer('');
 
-    // Check if current team has more questions
-    if (currentTeam.currentQuestionIndex < currentTeam.questions.length - 1) {
-      // Move to next question for current team
-      setTeams(prevTeams => {
-        const newTeams = [...prevTeams];
-        newTeams[currentTeamIndex].currentQuestionIndex += 1;
-        return newTeams;
-      });
-    } else {
-      // Move to next team
-      if (currentTeamIndex < teams.length - 1) {
-        setCurrentTeamIndex(currentTeamIndex + 1);
-      } else {
-        // Quiz complete
-        onComplete();
-      }
+    // Update current team's question index
+    setTeams(prevTeams => {
+      const newTeams = [...prevTeams];
+      newTeams[currentTeamIndex].currentQuestionIndex += 1;
+      return newTeams;
+    });
+
+    // Move to next team
+    const nextTeamIndex = (currentTeamIndex + 1) % teams.length;
+    setCurrentTeamIndex(nextTeamIndex);
+
+    // Check if quiz is complete (all teams finished all questions)
+    const allTeamsFinished = teams.every(team => 
+      team.currentQuestionIndex >= team.questions.length - 1
+    );
+    
+    if (allTeamsFinished && nextTeamIndex === 0) {
+      onComplete();
     }
+  };
+
+  const handleSkipQuestion = () => {
+    // Mark question as answered but incorrect
+    setTeams(prevTeams => {
+      const newTeams = [...prevTeams];
+      const teamIndex = currentTeamIndex;
+      const questionIndex = newTeams[teamIndex].currentQuestionIndex;
+      
+      newTeams[teamIndex].questions[questionIndex] = {
+        ...newTeams[teamIndex].questions[questionIndex],
+        answered: true,
+        isCorrect: false
+      };
+
+      return newTeams;
+    });
+
+    handleNextQuestion();
   };
 
   const getAnswerButtonClass = (option: string) => {
@@ -172,25 +193,35 @@ export const QuizGame: React.FC<QuizGameProps> = ({ teams, setTeams, onComplete 
                 </div>
               )}
 
-              <div className="flex justify-end">
-                {!showResult ? (
+              <div className="flex justify-between">
+                {!showResult && (
                   <Button
-                    onClick={handleSubmitAnswer}
-                    disabled={!selectedAnswer}
-                    className="gradient-primary shadow-primary px-6"
+                    onClick={handleSkipQuestion}
+                    variant="outline"
+                    className="px-6"
                   >
-                    Submit Answer
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={handleNextQuestion}
-                    className="gradient-primary shadow-primary px-6"
-                  >
-                    {currentTeamIndex === teams.length - 1 && currentTeam.currentQuestionIndex === currentTeam.questions.length - 1
-                      ? 'Show Results' 
-                      : 'Next Question'}
+                    Skip Question
                   </Button>
                 )}
+                
+                <div className="flex gap-2 ml-auto">
+                  {!showResult ? (
+                    <Button
+                      onClick={handleSubmitAnswer}
+                      disabled={!selectedAnswer}
+                      className="gradient-primary shadow-primary px-6"
+                    >
+                      Submit Answer
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={handleNextQuestion}
+                      className="gradient-primary shadow-primary px-6"
+                    >
+                      Next Team
+                    </Button>
+                  )}
+                </div>
               </div>
             </CardContent>
           </Card>
