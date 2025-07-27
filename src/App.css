@@ -5,7 +5,7 @@
   padding: 2rem;
   text-align: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #18181b 0%, #23272f 50%, #0f172a 100%);
+  background: linear-gradient(135deg, #ff6a00 0%, #ee0979 50%, #fdf200 100%);
   color: #f3f4f6;
 }
 
@@ -44,4 +44,3 @@
 .read-the-docs {
   color: #888;
 }
-
