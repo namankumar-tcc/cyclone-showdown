@@ -24,79 +24,204 @@ export type GameState = 'setup' | 'playing' | 'celebration';
 
 const QUESTIONS_POOL: Omit<Question, 'id'>[] = [
   {
-    question: "Explain how the composition of the Earth's atmosphere affects the formation of cyclones. What role do gases like carbon dioxide play in this process?",
-    options: ["CO2 blocks cyclone formation", "CO2 creates greenhouse effect leading to warming and cyclone formation", "CO2 has no effect on cyclones", "CO2 only affects wind direction"],
-    correctAnswer: "CO2 creates greenhouse effect leading to warming and cyclone formation"
+    question: "How do weather reports help in predicting cyclone formation?",
+    options: [
+      "By measuring soil temperature",
+      "By monitoring wind speed and air pressure patterns",
+      "By observing the color of clouds",
+      "By tracking the movement of animals"
+    ],
+    correctAnswer: "By monitoring wind speed and air pressure patterns"
   },
   {
-    question: "How does the greenhouse effect relate to the chemical composition of the atmosphere and the formation of global winds?",
-    options: ["It cools the Earth reducing winds", "It creates uneven heating patterns driving wind formation", "It only affects ocean currents", "It prevents wind formation"],
-    correctAnswer: "It creates uneven heating patterns driving wind formation"
+    question: "Which factor in a weather report is crucial in identifying the development of a cyclone?",
+    options: [
+      "Wind direction change",
+      "Decrease in air pressure",
+      "Cloud color",
+      "Temperature of the ground"
+    ],
+    correctAnswer: "Decrease in air pressure"
   },
   {
-    question: "Discuss how the interaction between nitrogen and oxygen molecules in the atmosphere influences the air pressure needed for cyclonic activity.",
-    options: ["They prevent pressure changes", "Their heat interactions cause pressure variations needed for cyclones", "They only affect temperature", "They create constant pressure"],
-    correctAnswer: "Their heat interactions cause pressure variations needed for cyclones"
+    question: "How does a cyclone form in the atmosphere according to weather reports?",
+    options: [
+      "When high-pressure air sinks into the Earth’s surface",
+      "When cold, dry air combines with warm, moist air",
+      "When warm, moist air rises and cools, creating a low-pressure system",
+      "When clouds freeze at the ground level"
+    ],
+    correctAnswer: "When warm, moist air rises and cools, creating a low-pressure system"
   },
   {
-    question: "What chemical reactions take place when water vapor condenses in clouds during the cyclone formation process?",
-    options: ["Hydrogen bonds break releasing cold", "Hydrogen bonds form releasing latent heat", "No chemical reactions occur", "Only physical changes happen"],
-    correctAnswer: "Hydrogen bonds form releasing latent heat"
+    question: "What is the primary factor that influences the formation of local winds?",
+    options: [
+      "The moon’s gravitational pull",
+      "Differences in air pressure caused by temperature variations",
+      "The Earth's rotation speed",
+      "The presence of clouds in the atmosphere"
+    ],
+    correctAnswer: "Differences in air pressure caused by temperature variations"
   },
   {
-    question: "How does the heat from the sun cause changes in atmospheric pressure, and what is the chemical basis for this change?",
-    options: ["Sun only affects temperature", "Heating causes water evaporation and air rising, reducing surface pressure", "Sun creates constant pressure", "Sun prevents pressure changes"],
-    correctAnswer: "Heating causes water evaporation and air rising, reducing surface pressure"
+    question: "How does the wind speed change as a cyclone intensifies?",
+    options: [
+      "It decreases as the cyclone reaches land",
+      "It remains constant regardless of the cyclone's development",
+      "It increases due to the stronger low-pressure system",
+      "It fluctuates randomly based on temperature"
+    ],
+    correctAnswer: "It increases due to the stronger low-pressure system"
   },
   {
-    question: "Using the ideal gas law, what happens to air pressure as a cyclone moves through a region with increasing humidity?",
-    options: ["Pressure increases significantly", "Pressure decreases due to water vapor displacing air molecules", "Pressure remains constant", "Humidity doesn't affect pressure"],
-    correctAnswer: "Pressure decreases due to water vapor displacing air molecules"
+    question: "What is the role of wind speed in the intensity of a cyclone?",
+    options: [
+      "High wind speeds decrease the intensity of cyclones",
+      "Low wind speeds cause cyclones to dissipate quickly",
+      "High wind speeds intensify the cyclone’s impact, causing more destruction",
+      "Wind speed has no role in the intensity of cyclones"
+    ],
+    correctAnswer: "High wind speeds intensify the cyclone’s impact, causing more destruction"
   },
   {
-    question: "What chemical processes occur when a cyclone causes the breakdown of minerals and organic material in coastal areas?",
-    options: ["Only physical erosion occurs", "Hydrolysis and salt water reactions break down minerals", "No chemical changes happen", "Only temperature changes occur"],
-    correctAnswer: "Hydrolysis and salt water reactions break down minerals"
+    question: "How does air pressure contribute to the formation of cyclones?",
+    options: [
+      "Low air pressure causes warm, moist air to rise, forming a cyclone",
+      "High air pressure pushes air upwards, cooling the atmosphere",
+      "Low air pressure causes air to condense into clouds",
+      "Air pressure has no role in cyclone formation"
+    ],
+    correctAnswer: "Low air pressure causes warm, moist air to rise, forming a cyclone"
   },
   {
-    question: "Explain the role of sulfur dioxide (SO2) emissions in the formation of acid rain and how this affects local wind patterns.",
-    options: ["SO2 has no effect on weather", "SO2 forms sulfuric acid causing cooling and altering wind patterns", "SO2 only affects air quality", "SO2 prevents rain formation"],
-    correctAnswer: "SO2 forms sulfuric acid causing cooling and altering wind patterns"
+    question: "What happens to air pressure at the center of a cyclone?",
+    options: [
+      "It increases drastically",
+      "It remains the same as the surrounding area",
+      "It decreases, creating the 'eye' of the storm",
+      "It fluctuates between high and low"
+    ],
+    correctAnswer: "It decreases, creating the 'eye' of the storm"
   },
   {
-    question: "How does the chemical composition of water in the atmosphere contribute to the formation of clouds and the movement of local winds?",
-    options: ["Water vapor only creates humidity", "Water vapor condensation releases heat driving wind patterns", "Water has no effect on winds", "Water only creates precipitation"],
-    correctAnswer: "Water vapor condensation releases heat driving wind patterns"
+    question: "Which statement is true about air pressure and cyclone formation?",
+    options: [
+      "High pressure at the center prevents cyclone formation",
+      "Low pressure at the center allows cyclonic winds to form",
+      "Air pressure is not important in cyclone formation",
+      "Air pressure only affects the direction of winds, not cyclone intensity"
+    ],
+    correctAnswer: "Low pressure at the center allows cyclonic winds to form"
   },
   {
-    question: "How do temperature variations in different layers of the atmosphere contribute to cyclone formation?",
-    options: ["Temperature has no effect", "Temperature differences create density and pressure variations driving cyclones", "Only surface temperature matters", "Temperature only affects visibility"],
-    correctAnswer: "Temperature differences create density and pressure variations driving cyclones"
+    question: "How does wind speed change as a cyclone moves over land?",
+    options: [
+      "It decreases rapidly because of the loss of moisture",
+      "It stays constant regardless of the location",
+      "It increases due to higher temperatures on land",
+      "It fluctuates due to changes in the Earth's rotation speed"
+    ],
+    correctAnswer: "It decreases rapidly because of the loss of moisture"
   },
   {
-    question: "How does the chemical composition of seawater affect the development of cyclones?",
-    options: ["Seawater composition is irrelevant", "Salt content affects evaporation rates and humidity levels", "Only water temperature matters", "Chemical composition prevents cyclones"],
-    correctAnswer: "Salt content affects evaporation rates and humidity levels"
+    question: "What is the role of wind speed in the formation of cyclones over oceans?",
+    options: [
+      "Wind speed has no role in oceanic cyclone formation",
+      "High wind speeds increase evaporation, which feeds the cyclone",
+      "Low wind speeds prevent cyclones from forming",
+      "Wind speed causes the ocean to cool, weakening cyclones"
+    ],
+    correctAnswer: "High wind speeds increase evaporation, which feeds the cyclone"
   },
   {
-    question: "Discuss the chemical basis for the formation of the eye of a cyclone and the process of temperature stabilization.",
-    options: ["No chemical processes involved", "Rapid condensation releases latent heat stabilizing the eye temperature", "Only pressure changes create the eye", "Chemical reactions prevent eye formation"],
-    correctAnswer: "Rapid condensation releases latent heat stabilizing the eye temperature"
+    question: "What happens during the formative stage of a cyclone?",
+    options: [
+      "The cyclone’s intensity decreases rapidly",
+      "Warm air rises and begins to cool, creating a low-pressure system",
+      "Air pressure remains constant, and winds die down",
+      "The cyclone reaches its peak and begins to move toward land"
+    ],
+    correctAnswer: "Warm air rises and begins to cool, creating a low-pressure system"
   },
   {
-    question: "What role do carbon compounds, such as methane, play in altering wind patterns and cyclonic activity?",
-    options: ["Methane has no atmospheric effect", "Methane enhances greenhouse effect intensifying cyclonic activity", "Methane only affects air quality", "Methane prevents wind formation"],
-    correctAnswer: "Methane enhances greenhouse effect intensifying cyclonic activity"
+    question: "How does the intensity of a cyclone change during its mature stage?",
+    options: [
+      "It loses strength as it moves away from warm waters",
+      "It reaches its maximum strength with high winds and low pressure",
+      "It becomes weaker, causing fewer damages",
+      "It stabilizes and remains consistent in intensity"
+    ],
+    correctAnswer: "It reaches its maximum strength with high winds and low pressure"
   },
   {
-    question: "Describe the chemical processes that contribute to the evaporation of seawater during cyclone formation.",
-    options: ["Only temperature causes evaporation", "Heat breaks hydrogen bonds converting liquid to vapor", "No chemical processes involved", "Salt prevents evaporation"],
-    correctAnswer: "Heat breaks hydrogen bonds converting liquid to vapor"
+    question: "What is the 'eye' of a cyclone, and how does it form?",
+    options: [
+      "It is a high-pressure zone where the winds are calm, forming when warm air condenses",
+      "It is a low-pressure zone with very strong winds, forming from the rising warm air",
+      "It is the center of the cyclone with no wind and low temperatures",
+      "It forms when water vapor in the air freezes at high altitudes"
+    ],
+    correctAnswer: "It is a high-pressure zone where the winds are calm, forming when warm air condenses"
   },
   {
-    question: "How do pollutants like nitrogen oxides affect wind patterns and the intensity of cyclones?",
-    options: ["Pollutants have no effect", "NOx creates ozone increasing heat and disrupting wind patterns", "Pollutants only affect air quality", "NOx prevents cyclone formation"],
-    correctAnswer: "NOx creates ozone increasing heat and disrupting wind patterns"
+    question: "During the mature stage of a cyclone, what causes the high winds and heavy rainfall?",
+    options: [
+      "Warm air in the center cooling down",
+      "The rapid rising of air and condensation of water vapor",
+      "The weakening of the cyclone’s central pressure",
+      "The cooling of ocean waters that feeds the cyclone’s energy"
+    ],
+    correctAnswer: "The rapid rising of air and condensation of water vapor"
+  },
+  {
+    question: "Which of the following actions is NOT recommended during a cyclone?",
+    options: [
+      "Taking shelter in a strong, well-built structure",
+      "Staying away from windows and glass areas",
+      "Evacuating to higher ground if you live near a coastline",
+      "Standing outside to observe the storm’s formation"
+    ],
+    correctAnswer: "Standing outside to observe the storm’s formation"
+  },
+  {
+    question: "What is the first thing to do when a cyclone warning is issued?",
+    options: [
+      "Check the temperature outside",
+      "Monitor the speed of the wind",
+      "Secure windows and doors and prepare for evacuation",
+      "Start cooking food for the storm duration"
+    ],
+    correctAnswer: "Secure windows and doors and prepare for evacuation"
+  },
+  {
+    question: "Why is it dangerous to stay near the coastline during a cyclone?",
+    options: [
+      "High winds cause heavy rainfall and flooding in coastal areas",
+      "Coastal areas have less wind speed, making them safe",
+      "The cyclone loses strength near the coast",
+      "Coastal areas are unaffected by cyclones"
+    ],
+    correctAnswer: "High winds cause heavy rainfall and flooding in coastal areas"
+  },
+  {
+    question: "How does wind pressure change during the formation of a cyclone?",
+    options: [
+      "Wind pressure stays constant during the formation",
+      "Wind pressure increases at the center of the cyclone",
+      "Wind pressure decreases, which leads to more intense winds",
+      "Wind pressure is irrelevant to cyclone formation"
+    ],
+    correctAnswer: "Wind pressure decreases, which leads to more intense winds"
+  },
+  {
+    question: "In a cyclone, which of the following typically happens to air pressure and wind speed?",
+    options: [
+      "Both air pressure and wind speed increase",
+      "Air pressure decreases and wind speed increases",
+      "Air pressure increases and wind speed decreases",
+      "Both air pressure and wind speed decrease"
+    ],
+    correctAnswer: "Air pressure decreases and wind speed increases"
   },
   {
     question: "Explain the role of water vapor in increasing the intensity of wind and air pressure in a cyclone's formative stage.",
