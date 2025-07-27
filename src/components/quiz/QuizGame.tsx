@@ -18,11 +18,39 @@ export const QuizGame: React.FC<QuizGameProps> = ({ teams, setTeams, onComplete 
   const [isCorrect, setIsCorrect] = useState(false);
 
   const currentTeam = teams[currentTeamIndex];
-  const currentQuestion = currentTeam.questions[currentTeam.currentQuestionIndex];
+  const currentQuestion = currentTeam?.questions?.[currentTeam.currentQuestionIndex];
   const totalQuestions = teams.reduce((sum, team) => sum + team.questions.length, 0);
   const answeredQuestions = teams.reduce((sum, team) => 
     sum + team.questions.filter(q => q.answered).length, 0
   );
+
+  // If current question is undefined, find next team with questions
+  useEffect(() => {
+    if (!currentQuestion && teams.length > 0) {
+      let nextTeamIndex = currentTeamIndex;
+      let attempts = 0;
+      
+      while (attempts < teams.length) {
+        const team = teams[nextTeamIndex];
+        if (team.currentQuestionIndex < team.questions.length) {
+          setCurrentTeamIndex(nextTeamIndex);
+          break;
+        }
+        nextTeamIndex = (nextTeamIndex + 1) % teams.length;
+        attempts++;
+      }
+      
+      // If no team has questions left, complete the quiz
+      if (attempts === teams.length) {
+        onComplete();
+      }
+    }
+  }, [currentQuestion, currentTeamIndex, teams, onComplete]);
+
+  // Don't render if no current question
+  if (!currentQuestion) {
+    return <div>Loading...</div>;
+  }
 
   const handleAnswerSelect = (answer: string) => {
     if (showResult) return;
