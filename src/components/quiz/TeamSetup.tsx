@@ -26,58 +26,94 @@ export const TeamSetup: React.FC<TeamSetupProps> = ({ onStartQuiz }) => {
   const validTeamCount = teamNames.filter(name => name.trim() !== '').length;
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <Card className="w-full max-w-4xl shadow-card animate-fade-in">
-        <CardHeader className="text-center space-y-4">
-          <CardTitle className="text-4xl md:text-6xl font-bold gradient-primary bg-clip-text text-transparent">
-            🌪️ Winds & Storms Quiz
-          </CardTitle>
-          <p className="text-xl text-muted-foreground">
-            Enter your team names to start the ultimate weather quiz!
-          </p>
-        </CardHeader>
-        
-        <CardContent className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {Array.from({ length: 8 }, (_, index) => (
-              <div key={index} className="space-y-2">
-                <label className="text-sm font-medium text-foreground">
-                  Team {index + 1}
-                </label>
-                <Input
-                  placeholder={`Enter team ${index + 1} name...`}
-                  value={teamNames[index]}
-                  onChange={(e) => handleTeamNameChange(index, e.target.value)}
-                  className="transition-all duration-200 focus:shadow-primary"
-                />
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full animate-pulse opacity-60"></div>
+        <div className="absolute top-40 right-20 w-24 h-24 bg-secondary/10 rounded-full animate-bounce opacity-40"></div>
+        <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-accent/10 rounded-full animate-pulse opacity-30"></div>
+        <div className="absolute bottom-20 right-1/3 w-28 h-28 bg-primary/10 rounded-full animate-bounce opacity-50"></div>
+      </div>
+
+      <div className="min-h-screen flex items-center justify-center p-4 relative z-10">
+        <Card className="w-full max-w-4xl shadow-2xl animate-fade-in border-2 border-primary/20 backdrop-blur-sm bg-card/95">
+          <CardHeader className="text-center space-y-6 pb-8">
+            <div className="space-y-4">
+              <CardTitle className="text-5xl md:text-7xl font-bold gradient-primary bg-clip-text text-transparent animate-pulse">
+                ⚗️ Chemistry Quiz Challenge
+              </CardTitle>
+              <div className="flex justify-center space-x-4 text-3xl animate-bounce">
+                <span>🌪️</span>
+                <span>🌊</span>
+                <span>⛈️</span>
+                <span>🔬</span>
               </div>
-            ))}
-          </div>
-
-          <div className="text-center space-y-4">
-            <p className="text-sm text-muted-foreground">
-              {validTeamCount === 0 && "Enter at least 2 team names to start"}
-              {validTeamCount === 1 && "Enter one more team name to start"}
-              {validTeamCount >= 2 && `${validTeamCount} teams ready to play!`}
+            </div>
+            <p className="text-xl md:text-2xl text-muted-foreground animate-fade-in">
+              Explore the <span className="text-primary font-semibold">chemical secrets</span> behind weather, climate & storms!
             </p>
-            
-            <Button
-              onClick={handleStartQuiz}
-              disabled={validTeamCount < 2}
-              size="lg"
-              className="gradient-primary text-lg px-8 py-3 shadow-primary hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              🚀 Start Quiz
-            </Button>
-          </div>
+          </CardHeader>
+          
+          <CardContent className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {Array.from({ length: 8 }, (_, index) => (
+                <div key={index} className="space-y-3">
+                  <label className="text-sm font-semibold text-foreground flex items-center space-x-2">
+                    <span className="text-lg">🧪</span>
+                    <span>Team {index + 1}</span>
+                  </label>
+                  <Input
+                    placeholder={`Enter team ${index + 1} name...`}
+                    value={teamNames[index]}
+                    onChange={(e) => handleTeamNameChange(index, e.target.value)}
+                    className="transition-all duration-300 focus:shadow-lg focus:shadow-primary/25 border-2 hover:border-primary/30 focus:border-primary/50 bg-background/80 backdrop-blur-sm"
+                  />
+                </div>
+              ))}
+            </div>
 
-          <div className="text-center text-sm text-muted-foreground space-y-2">
-            <p>📝 Each team gets 3 random questions about winds, storms & cyclones</p>
-            <p>🏆 Correct answers earn points for the leaderboard</p>
-            <p>🎉 Winner gets a special celebration!</p>
-          </div>
-        </CardContent>
-      </Card>
+            <div className="text-center space-y-6">
+              <div className="bg-muted/50 rounded-lg p-4 backdrop-blur-sm">
+                <p className="text-lg font-medium">
+                  {validTeamCount === 0 && "🎯 Enter at least 2 team names to start the challenge"}
+                  {validTeamCount === 1 && "🔬 Enter one more team to begin the experiment"}
+                  {validTeamCount >= 2 && `⚡ ${validTeamCount} teams ready for the chemistry challenge!`}
+                </p>
+              </div>
+              
+              <Button
+                onClick={handleStartQuiz}
+                disabled={validTeamCount < 2}
+                size="lg"
+                className="gradient-primary text-xl px-12 py-4 shadow-2xl hover:shadow-primary/25 hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 font-semibold"
+              >
+                {validTeamCount >= 2 ? "🚀 Launch Quiz" : "⏳ Waiting for Teams"}
+              </Button>
+            </div>
+
+            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-xl p-6 space-y-4 backdrop-blur-sm border border-primary/20">
+              <h3 className="text-center text-lg font-semibold text-primary mb-4">🔬 What Awaits You</h3>
+              <div className="grid md:grid-cols-3 gap-4 text-center">
+                <div className="space-y-2">
+                  <div className="text-2xl">⚗️</div>
+                  <p className="text-sm font-medium">Chemistry & Weather</p>
+                  <p className="text-xs text-muted-foreground">Explore molecular interactions in atmospheric phenomena</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-2xl">🏆</div>
+                  <p className="text-sm font-medium">3 Questions Per Team</p>
+                  <p className="text-xs text-muted-foreground">Test your knowledge of chemical processes</p>
+                </div>
+                <div className="space-y-2">
+                  <div className="text-2xl">🎉</div>
+                  <p className="text-sm font-medium">Victory Celebration</p>
+                  <p className="text-xs text-muted-foreground">Winners get confetti & congratulations!</p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 };
