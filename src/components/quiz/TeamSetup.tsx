@@ -60,7 +60,7 @@ export const TeamSetup: React.FC<TeamSetupProps> = ({ onStartQuiz }) => {
           </CardHeader>
           
           <CardContent className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${!showEighthTeam ? 'md:[&>:nth-child(7)]:col-span-2 md:[&>:nth-child(7)]:max-w-md md:[&>:nth-child(7)]:mx-auto' : ''}`}>
               {Array.from({ length: showEighthTeam ? 8 : 7 }, (_, index) => (
                 <div key={index} className="space-y-3">
                   <label className="text-sm font-semibold text-foreground flex items-center space-x-2">
