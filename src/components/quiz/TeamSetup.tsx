@@ -9,6 +9,7 @@ interface TeamSetupProps {
 
 export const TeamSetup: React.FC<TeamSetupProps> = ({ onStartQuiz }) => {
   const [teamNames, setTeamNames] = useState<string[]>(Array(8).fill(''));
+  const [showEighthTeam, setShowEighthTeam] = useState(false);
 
   const handleTeamNameChange = (index: number, name: string) => {
     const newTeamNames = [...teamNames];
@@ -60,7 +61,7 @@ export const TeamSetup: React.FC<TeamSetupProps> = ({ onStartQuiz }) => {
           
           <CardContent className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {Array.from({ length: 8 }, (_, index) => (
+              {Array.from({ length: showEighthTeam ? 8 : 7 }, (_, index) => (
                 <div key={index} className="space-y-3">
                   <label className="text-sm font-semibold text-foreground flex items-center space-x-2">
                     <span className="text-2xl">{teamSymbols[index]}</span>
@@ -83,7 +84,17 @@ export const TeamSetup: React.FC<TeamSetupProps> = ({ onStartQuiz }) => {
                   {validTeamCount === 1 && "🔬 Enter one more team to begin the experiment"}
                   {validTeamCount >= 2 && `⚡ ${validTeamCount} teams ready for the chemistry challenge!`}
                 </p>
-              </div>
+            </div>
+
+            <div className="text-center">
+              <Button
+                onClick={() => setShowEighthTeam(!showEighthTeam)}
+                variant="outline"
+                className="border-primary/30 hover:border-primary/50 hover:bg-primary/10"
+              >
+                {showEighthTeam ? '➖ Remove 8th Team' : '➕ Add 8th Team'}
+              </Button>
+            </div>
               
               <Button
                 onClick={handleStartQuiz}
