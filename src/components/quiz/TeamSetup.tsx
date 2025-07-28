@@ -25,14 +25,18 @@ export const TeamSetup: React.FC<TeamSetupProps> = ({ onStartQuiz }) => {
 
   const validTeamCount = teamNames.filter(name => name.trim() !== '').length;
 
+  const teamSymbols = ['🧪', '⚗️', '🔬', '🌪️', '⛈️', '🌊', '💨', '❄️'];
+
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-secondary/5">
-      {/* Animated background elements */}
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-primary/20 via-secondary/10 to-accent/20">
+      {/* Enhanced animated background elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full animate-pulse opacity-60"></div>
-        <div className="absolute top-40 right-20 w-24 h-24 bg-secondary/10 rounded-full animate-bounce opacity-40"></div>
-        <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-accent/10 rounded-full animate-pulse opacity-30"></div>
-        <div className="absolute bottom-20 right-1/3 w-28 h-28 bg-primary/10 rounded-full animate-bounce opacity-50"></div>
+        <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-full animate-pulse opacity-80 blur-sm"></div>
+        <div className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-r from-accent/40 to-primary/40 rounded-full animate-bounce opacity-60 blur-sm"></div>
+        <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-gradient-to-r from-secondary/30 to-accent/30 rounded-full animate-pulse opacity-50 blur-sm"></div>
+        <div className="absolute bottom-20 right-1/3 w-28 h-28 bg-gradient-to-r from-primary/40 to-secondary/40 rounded-full animate-bounce opacity-70 blur-sm"></div>
+        <div className="absolute top-1/2 left-1/2 w-36 h-36 bg-gradient-to-r from-accent/20 to-primary/20 rounded-full animate-pulse opacity-40 blur-lg transform -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute top-16 right-1/4 w-20 h-20 bg-gradient-to-r from-secondary/40 to-accent/40 rounded-full animate-bounce opacity-60 blur-sm"></div>
       </div>
 
       <div className="min-h-screen flex items-center justify-center p-4 relative z-10">
@@ -59,14 +63,14 @@ export const TeamSetup: React.FC<TeamSetupProps> = ({ onStartQuiz }) => {
               {Array.from({ length: 8 }, (_, index) => (
                 <div key={index} className="space-y-3">
                   <label className="text-sm font-semibold text-foreground flex items-center space-x-2">
-                    <span className="text-lg">🧪</span>
+                    <span className="text-2xl">{teamSymbols[index]}</span>
                     <span>Team {index + 1}</span>
                   </label>
                   <Input
                     placeholder={`Enter team ${index + 1} name...`}
                     value={teamNames[index]}
                     onChange={(e) => handleTeamNameChange(index, e.target.value)}
-                    className="transition-all duration-300 focus:shadow-lg focus:shadow-primary/25 border-2 hover:border-primary/30 focus:border-primary/50 bg-background/80 backdrop-blur-sm"
+                    className="h-14 text-lg transition-all duration-300 focus:shadow-lg focus:shadow-primary/25 border-2 hover:border-primary/30 focus:border-primary/50 bg-background/80 backdrop-blur-sm font-medium"
                   />
                 </div>
               ))}

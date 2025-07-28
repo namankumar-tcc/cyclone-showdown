@@ -211,11 +211,14 @@ export const QuizGame: React.FC<QuizGameProps> = ({ teams, setTeams, onComplete 
               </div>
 
               {showResult && (
-                <div className={`p-4 rounded-lg animate-bounce-in ${isCorrect ? 'bg-success/20 border border-success' : 'bg-destructive/20 border border-destructive'}`}>
+                <div className={`p-4 rounded-lg animate-bounce-in ${isCorrect ? 'bg-success/20 border border-success' : 'bg-primary/10 border border-primary/30'}`}>
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl">{isCorrect ? '🎉' : '❌'}</span>
+                    <span className="text-2xl">{isCorrect ? '🎉' : '💪'}</span>
                     <span className="font-medium">
-                      {isCorrect ? 'Correct! Well done!' : `Wrong! The correct answer is: ${currentQuestion.correctAnswer}`}
+                      {isCorrect 
+                        ? 'Correct! Well done!' 
+                        : `Great attempt! ${['Nice try!', 'Keep going!', 'You\'re learning!', 'Good effort!', 'Almost there!'][Math.floor(Math.random() * 5)]} The correct answer is: ${currentQuestion.correctAnswer}`
+                      }
                     </span>
                   </div>
                 </div>
