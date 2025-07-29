@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { type Team } from '../QuizApp';
+import { soundGenerator } from '@/utils/sounds';
 
 interface CelebrationProps {
   teams: Team[];
@@ -41,6 +42,11 @@ export const Celebration: React.FC<CelebrationProps> = ({ teams, onRestart }) =>
     }
     
     setConfetti(pieces);
+    
+    // Play celebration sound
+    setTimeout(() => {
+      soundGenerator.playCelebrationSound();
+    }, 500); // Delay slightly for better effect
   }, []);
 
   const getScorePercentage = (score: number) => {

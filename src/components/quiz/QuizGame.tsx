@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { type Team, type Question } from '../QuizApp';
+import { soundGenerator } from '@/utils/sounds';
 
 interface QuizGameProps {
   teams: Team[];
@@ -63,6 +64,13 @@ export const QuizGame: React.FC<QuizGameProps> = ({ teams, setTeams, onComplete 
     const correct = selectedAnswer === currentQuestion.correctAnswer;
     setIsCorrect(correct);
     setShowResult(true);
+
+    // Play sound effect
+    if (correct) {
+      soundGenerator.playCorrectSound();
+    } else {
+      soundGenerator.playWrongSound();
+    }
 
     // Update team data
     setTeams(prevTeams => {
