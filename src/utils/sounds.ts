@@ -26,7 +26,7 @@ class SoundGenerator {
       oscillator.type = 'sine';
       oscillator.frequency.setValueAtTime(freq, ctx.currentTime + index * 0.1);
 
-      gainNode.gain.setValueAtTime(0.6, ctx.currentTime + index * 0.1); // Increased volume
+      gainNode.gain.setValueAtTime(0.8, ctx.currentTime + index * 0.1); // Much louder
       gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + index * 0.1 + 0.8);
 
       oscillator.start(ctx.currentTime + index * 0.1);
@@ -57,7 +57,7 @@ class SoundGenerator {
     oscillator2.frequency.setValueAtTime(330, ctx.currentTime); // E4
     oscillator2.frequency.exponentialRampToValueAtTime(165, ctx.currentTime + 0.8); // E3
 
-    gainNode.gain.setValueAtTime(0.4, ctx.currentTime); // Increased volume
+    gainNode.gain.setValueAtTime(0.7, ctx.currentTime); // Much louder
     gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1);
 
     oscillator1.start(ctx.currentTime);
@@ -82,7 +82,7 @@ class SoundGenerator {
     yaaOscillator.frequency.setValueAtTime(200, ctx.currentTime);
     yaaOscillator.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.5);
     
-    yaaGain.gain.setValueAtTime(0.7, ctx.currentTime); // Loud!
+    yaaGain.gain.setValueAtTime(0.9, ctx.currentTime); // Very loud!
     yaaGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.8);
     
     yaaOscillator.start(ctx.currentTime);
@@ -102,7 +102,7 @@ class SoundGenerator {
       oscillator.type = 'sine';
       oscillator.frequency.setValueAtTime(freq, ctx.currentTime + chimeTimings[index]);
 
-      gainNode.gain.setValueAtTime(0.6, ctx.currentTime + chimeTimings[index]);
+      gainNode.gain.setValueAtTime(0.8, ctx.currentTime + chimeTimings[index]);
       gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + chimeTimings[index] + 0.5);
 
       oscillator.start(ctx.currentTime + chimeTimings[index]);
@@ -121,7 +121,7 @@ class SoundGenerator {
       flourishOsc.frequency.setValueAtTime(1046.50, ctx.currentTime); // C6
       flourishOsc.frequency.exponentialRampToValueAtTime(2093.00, ctx.currentTime + 0.3); // C7
       
-      flourishGain.gain.setValueAtTime(0.5, ctx.currentTime);
+      flourishGain.gain.setValueAtTime(0.8, ctx.currentTime);
       flourishGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
       
       flourishOsc.start(ctx.currentTime);
