@@ -66,12 +66,41 @@ class SoundGenerator {
     oscillator2.stop(ctx.currentTime + 1);
   }
 
-  // Play a celebration sound like "YAAAAAYYY!"
+  // Play a celebration sound like "YAAAAAYYY!" with crowd cheering
   playCelebrationSound() {
     const ctx = this.getAudioContext();
     
-    // Create an exciting "YAAAAAYYY!" celebration sound
-    // First part: Rising "YAA" sound
+    // Create crowd cheering sound (background noise)
+    const crowdGain = ctx.createGain();
+    const noiseBuffer = ctx.createBuffer(1, ctx.sampleRate * 3, ctx.sampleRate);
+    const noiseData = noiseBuffer.getChannelData(0);
+    
+    // Generate pink noise for crowd effect
+    for (let i = 0; i < noiseData.length; i++) {
+      noiseData[i] = (Math.random() * 2 - 1) * 0.3;
+    }
+    
+    const crowdSource = ctx.createBufferSource();
+    const crowdFilter = ctx.createBiquadFilter();
+    
+    crowdSource.buffer = noiseBuffer;
+    crowdSource.connect(crowdFilter);
+    crowdFilter.connect(crowdGain);
+    crowdGain.connect(ctx.destination);
+    
+    crowdFilter.type = 'bandpass';
+    crowdFilter.frequency.setValueAtTime(800, ctx.currentTime);
+    crowdFilter.Q.setValueAtTime(2, ctx.currentTime);
+    
+    crowdGain.gain.setValueAtTime(0, ctx.currentTime);
+    crowdGain.gain.linearRampToValueAtTime(0.4, ctx.currentTime + 0.5);
+    crowdGain.gain.linearRampToValueAtTime(0.6, ctx.currentTime + 1.5);
+    crowdGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 3);
+    
+    crowdSource.start(ctx.currentTime);
+    crowdSource.stop(ctx.currentTime + 3);
+    
+    // Main "YAAAAAYYY!" sound
     const yaaOscillator = ctx.createOscillator();
     const yaaGain = ctx.createGain();
     
@@ -80,17 +109,37 @@ class SoundGenerator {
     
     yaaOscillator.type = 'sawtooth';
     yaaOscillator.frequency.setValueAtTime(200, ctx.currentTime);
-    yaaOscillator.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.5);
+    yaaOscillator.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.8);
     
     yaaGain.gain.setValueAtTime(0.9, ctx.currentTime); // Very loud!
-    yaaGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.8);
+    yaaGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1.2);
     
     yaaOscillator.start(ctx.currentTime);
-    yaaOscillator.stop(ctx.currentTime + 0.8);
+    yaaOscillator.stop(ctx.currentTime + 1.2);
     
-    // Second part: Celebratory chimes
+    // Multiple cheering voices (harmonics)
+    const cheerFreqs = [300, 450, 600, 800];
+    cheerFreqs.forEach((baseFreq, index) => {
+      const cheerOsc = ctx.createOscillator();
+      const cheerGain = ctx.createGain();
+      
+      cheerOsc.connect(cheerGain);
+      cheerGain.connect(ctx.destination);
+      
+      cheerOsc.type = 'triangle';
+      cheerOsc.frequency.setValueAtTime(baseFreq, ctx.currentTime + index * 0.1);
+      cheerOsc.frequency.exponentialRampToValueAtTime(baseFreq * 1.5, ctx.currentTime + 0.8 + index * 0.1);
+      
+      cheerGain.gain.setValueAtTime(0.3, ctx.currentTime + index * 0.1);
+      cheerGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1.0 + index * 0.1);
+      
+      cheerOsc.start(ctx.currentTime + index * 0.1);
+      cheerOsc.stop(ctx.currentTime + 1.0 + index * 0.1);
+    });
+    
+    // Celebratory chimes
     const chimeFreqs = [523.25, 659.25, 783.99, 1046.50, 783.99, 1046.50, 1318.51]; // C5, E5, G5, C6, G5, C6, E6
-    const chimeTimings = [0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2];
+    const chimeTimings = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6];
     
     chimeFreqs.forEach((freq, index) => {
       const oscillator = ctx.createOscillator();
@@ -109,7 +158,7 @@ class SoundGenerator {
       oscillator.stop(ctx.currentTime + chimeTimings[index] + 0.5);
     });
     
-    // Third part: Ending flourish
+    // Ending flourish with more crowd energy
     setTimeout(() => {
       const flourishOsc = ctx.createOscillator();
       const flourishGain = ctx.createGain();
@@ -119,14 +168,14 @@ class SoundGenerator {
       
       flourishOsc.type = 'square';
       flourishOsc.frequency.setValueAtTime(1046.50, ctx.currentTime); // C6
-      flourishOsc.frequency.exponentialRampToValueAtTime(2093.00, ctx.currentTime + 0.3); // C7
+      flourishOsc.frequency.exponentialRampToValueAtTime(2093.00, ctx.currentTime + 0.4); // C7
       
       flourishGain.gain.setValueAtTime(0.8, ctx.currentTime);
-      flourishGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+      flourishGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
       
       flourishOsc.start(ctx.currentTime);
-      flourishOsc.stop(ctx.currentTime + 0.4);
-    }, 1300);
+      flourishOsc.stop(ctx.currentTime + 0.5);
+    }, 1700);
   }
 }
 
